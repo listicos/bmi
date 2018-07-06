@@ -1,7 +1,14 @@
-const type = {
-  base: 'San Francisco',
-  bold: 'San Francisco',
-  emphasis: 'San Francisco'
+import Colors from './Colors'
+
+const weight = {
+  light: '300',
+  regular: '400',
+  bold: '700'
+}
+
+const family = {
+  raleway: 'Raleway',
+  oswald: 'Oswald'
 }
 
 const size = {
@@ -10,50 +17,71 @@ const size = {
   h3: 30,
   h4: 26,
   h5: 20,
-  h6: 19,
-  input: 18,
-  regular: 17,
-  medium: 14,
-  small: 12,
-  tiny: 8.5
+  h6: 18,
+  text: 16,
+  regular: 14,
+  medium: 12,
+  small: 10,
+  tiny: 8
 }
 
 const style = {
   h1: {
-    fontSize: size.h1
+    fontFamily: family.raleway,
+    fontSize: size.h1,
+    fontWeight: weight.bold,
+    color: Colors.text
   },
   h2: {
-    fontWeight: 'bold',
-    fontSize: size.h2
+    fontFamily: family.raleway,
+    fontSize: size.h2,
+    fontWeight: weight.bold,
+    color: Colors.text
   },
   h3: {
-    // fontFamily: type.emphasis,
-    fontSize: size.h3
+    fontFamily: family.raleway,
+    fontSize: size.h3,
+    fontWeight: weight.bold,
+    color: Colors.text
   },
   h4: {
-    fontFamily: type.base,
-    fontSize: size.h4
+    fontFamily: family.raleway,
+    fontSize: size.h4,
+    fontWeight: weight.regular,
+    color: Colors.text
   },
   h5: {
-    fontFamily: type.base,
-    fontSize: size.h5
+    fontFamily: family.raleway,
+    fontSize: size.h5,
+    fontWeight: weight.regular,
+    color: Colors.text
   },
   h6: {
-    fontFamily: type.emphasis,
-    fontSize: size.h6
+    fontFamily: family.raleway,
+    fontSize: size.h6,
+    fontWeight: weight.regular,
+    color: Colors.text,
+    letterSpacing: 0.5
   },
-  normal: {
-    // fontFamily: type.base,
-    fontSize: size.regular
+  text: {
+    fontFamily: family.raleway,
+    fontSize: size.text,
+    fontWeight: weight.regular,
+    color: Colors.text,
+    letterSpacing: 0.5
   },
-  description: {
-    fontFamily: type.base,
-    fontSize: size.medium
+  inputNumber: {
+    fontFamily: family.oswald,
+    fontSize: 56,
+    fontWeight: weight.bold,
+    color: Colors.text,
+    letterSpacing: 1
   }
 }
 
 export default {
-  type,
+  weight,
+  family,
   size,
   style
 }

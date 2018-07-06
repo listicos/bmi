@@ -6,6 +6,9 @@
 # dependencies
 /node_modules
 
+# android
+/android
+
 # production
 /build
 /public/assets

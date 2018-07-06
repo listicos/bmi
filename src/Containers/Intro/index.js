@@ -1,21 +1,33 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Button from '../../Components/Button'
+import { withRouter } from 'react-router-dom'
+
 import { Colors, Fonts } from '../../Themes'
+
+import TextInput from '../../Components/TextInput'
+import Button from '../../Components/Button'
 
 class Intro extends Component {
   start = () => {
-    this.props.navigation.navigate('Quiz')
+    this.props.history.push('/calculator')
   }
 
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.welcomeContainer}>
+        <View style={styles.header}>
           <Text style={styles.welcome}>Welcome to BMI</Text>
-          <Text style={styles.instructions}>Please enter you name</Text>
+          <Text style={styles.instructions}>Please enter your name and email</Text>
         </View>
-        <Button text='BEGIN' onPress={this.start} />
+        <View style={styles.welcomeContainer}>
+          <View style={styles.form}>
+            <TextInput label='Enter your name' color={Colors.contrastText} />
+            <View style={styles.space} />
+            <TextInput label='Enter your email' color={Colors.contrastText} />
+            <View style={styles.space} />
+            <Button text='Register' onPress={this.start} />
+          </View>
+        </View>
       </View>
     )
   }
@@ -26,23 +38,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background
   },
-  welcomeContainer: {
-    flex: 1,
+  header: {
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    height: 300,
+    backgroundColor: Colors.header
+  },
+  welcomeContainer: {
+    display: 'block',
+    paddingHorizontal: 30
+  },
+  form: {
+    maxWidth: 400,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: 30,
+    borderRadius: 3,
+    backgroundColor: Colors.contrast,
+    marginTop: -60
   },
   welcome: {
     ...Fonts.style.h1,
-    color: Colors.textAccent,
     textAlign: 'center',
     marginBottom: 15
   },
   instructions: {
-    ...Fonts.style.normal,
-    maxWidth: 250,
-    textAlign: 'center',
-    color: Colors.textAccent
+    ...Fonts.style.h6,
+    maxWidth: 350,
+    textAlign: 'center'
+  },
+  space: {
+    height: 20
   }
 })
 
-export default Intro
+export default withRouter(Intro)

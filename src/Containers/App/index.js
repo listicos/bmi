@@ -1,14 +1,20 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import Root from './Root'
-import createStore from '../../Store/Redux'
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-const store = createStore(true)
+import Intro from '../Intro'
+import Calculator from '../Calculator'
 
-const App = () => (
-  <Provider store={store}>
-    <Root />
-  </Provider>
-)
+class App extends Component {
+  render () {
+    return (
+      <Router>
+        <div className={`router-wrap`}>
+          <Route exact path='/' component={Intro} />
+          <Route exact path='/calculator' component={Calculator} />
+        </div>
+      </Router>
+    )
+  }
+}
 
 export default App
