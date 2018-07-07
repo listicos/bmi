@@ -1,29 +1,34 @@
 import Immutable from 'seamless-immutable'
-import { FETCH_BMI_RESULT, FETCH_BMI, FETCH_BMI_PARAMETERS } from './constants'
+import { SET_BMI_AGE, SET_BMI_WEIGHT, SET_BMI_HEIGHT, SET_BMI_GENDER } from './constants'
 
 const INITIAL_STATE: BmiState = Immutable({
-  isFetching: false,
-  error: false,
-  parameters: {
-    age: 18,
-    weight: 160,
-    height: 70,
-    gender: ''
-  }
+  age: 18,
+  weight: 160,
+  height: 70,
+  gender: ''
 })
 
 export default function reducer (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_BMI:
+    case SET_BMI_AGE:
       return {
         ...state,
-        isFetching: true
+        age: action.payload
       }
-    case FETCH_BMI_PARAMETERS:
+    case SET_BMI_WEIGHT:
       return {
         ...state,
-        parameters: action.payload,
-        isFetching: false
+        weight: action.payload
+      }
+    case SET_BMI_HEIGHT:
+      return {
+        ...state,
+        height: action.payload
+      }
+    case SET_BMI_GENDER:
+      return {
+        ...state,
+        gender: action.payload
       }
     default:
       return state

@@ -1,26 +1,25 @@
 import Immutable from 'seamless-immutable'
-import { FETCH_USER, FETCH_USER_PARAMETERS } from './constants'
+import { SET_USER_NAME, SET_USER_EMAIL } from './constants'
 
 const INITIAL_STATE: BmiState = Immutable({
   isFetching: false,
   error: false,
-  parameters: {
-    name: '',
-    email: ''
-  }
+  name: '',
+  email: ''
 })
 
 export default function reducer (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_USER:
+    case SET_USER_NAME:
       return {
         ...state,
+        name: action.payload,
         isFetching: true
       }
-    case FETCH_USER_PARAMETERS:
+    case SET_USER_EMAIL:
       return {
         ...state,
-        parameters: action.payload,
+        email: action.payload,
         isFetching: false
       }
     default:

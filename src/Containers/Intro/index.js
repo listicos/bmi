@@ -8,7 +8,7 @@ import { Colors, Fonts } from '../../Themes'
 import TextInput from '../../Components/TextInput'
 import Button from '../../Components/Button'
 
-import { updateUserParameters } from './actions'
+import { updateUserName, updateUserEmail } from './actions'
 
 class Intro extends Component {
   start = () => {
@@ -16,17 +16,15 @@ class Intro extends Component {
   }
 
   setName = (name) => {
-    const { email } = this.props.user.parameters
-    this.props.updateUserParameters({ name, email })
+    this.props.updateUserName(name)
   }
 
   setEmail = (email) => {
-    const { name } = this.props.user.parameters
-    this.props.updateUserParameters({ name, email })
+    this.props.updateUserEmail(email)
   }
 
   render () {
-    console.log(this.props)
+    const { name, email } = this.props.user
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -35,9 +33,14 @@ class Intro extends Component {
         </View>
         <View style={styles.welcomeContainer}>
           <View style={styles.form}>
-            <TextInput label='Enter your name' color={Colors.contrastText} onChangeText={this.setName} />
+            <TextInput label='Enter your name' color={Colors.contrastText} value={name} onChangeText={this.setName} />
             <View style={styles.space} />
-            <TextInput label='Enter your email' color={Colors.contrastText} onChangeText={this.setEmail} />
+            <TextInput
+              label='Enter your email'
+              color={Colors.contrastText}
+              value={email}
+              onChangeText={this.setEmail}
+            />
             <View style={styles.space} />
             <Button text='Register' onPress={this.start} />
           </View>
@@ -90,6 +93,7 @@ const mapStateToProps = (state) => ({ user: state.user })
 
 export default withRouter(
   connect(mapStateToProps, {
-    updateUserParameters
+    updateUserName,
+    updateUserEmail
   })(Intro)
 )

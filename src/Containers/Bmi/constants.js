@@ -1,3 +1,4 @@
-export const FETCH_BMI = 'bmi/Bmi/FETCH_BMI'
-export const FETCH_BMI_PARAMETERS = 'bmi/Bmi/FETCH_BMI_PARAMETERS'
-export const FETCH_BMI_RESULT = 'bmi/Bmi/FETCH_BMI_RESULT'
+export const SET_BMI_AGE = 'bmi/Bmi/SET_BMI_AGE'
+export const SET_BMI_WEIGHT = 'bmi/Bmi/SET_BMI_WEIGHT'
+export const SET_BMI_HEIGHT = 'bmi/Bmi/SET_BMI_HEIGHT'
+export const SET_BMI_GENDER = 'bmi/Bmi/SET_BMI_GENDER'

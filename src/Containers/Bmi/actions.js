@@ -1,8 +1,28 @@
-import { FETCH_BMI_RESULT, FETCH_BMI, FETCH_BMI_PARAMETERS } from './constants'
+import { SET_BMI_AGE, SET_BMI_WEIGHT, SET_BMI_HEIGHT, SET_BMI_GENDER } from './constants'
 
-export const updateBmiParameters = ({ age, weight, height, gender }) => {
+export const updateBmiAge = (age) => {
   return {
-    type: FETCH_BMI_PARAMETERS,
-    payload: { age, weight, height, gender }
+    type: SET_BMI_AGE,
+    payload: age
+  }
+}
+
+export const updateBmiWeight = (weight) => {
+  return {
+    type: SET_BMI_WEIGHT,
+    payload: weight
+  }
+}
+export const updateBmiHeight = (height) => {
+  return {
+    type: SET_BMI_HEIGHT,
+    payload: height
+  }
+}
+
+export const updateBmiGender = (gender) => {
+  return {
+    type: SET_BMI_GENDER,
+    payload: gender
   }
 }

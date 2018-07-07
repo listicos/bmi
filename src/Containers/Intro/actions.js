@@ -1,8 +1,15 @@
-import { FETCH_USER, FETCH_USER_PARAMETERS } from './constants'
+import { SET_USER_NAME, SET_USER_EMAIL } from './constants'
 
-export const updateUserParameters = ({ age, weight, height, gender }) => {
+export const updateUserName = (name) => {
   return {
-    type: FETCH_USER_PARAMETERS,
-    payload: { age, weight, height, gender }
+    type: SET_USER_NAME,
+    payload: name
+  }
+}
+
+export const updateUserEmail = (email) => {
+  return {
+    type: SET_USER_EMAIL,
+    payload: email
   }
 }

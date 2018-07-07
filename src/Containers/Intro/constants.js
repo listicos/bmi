@@ -1,2 +1,2 @@
-export const FETCH_USER = 'bmi/Bmi/FETCH_USER'
-export const FETCH_USER_PARAMETERS = 'bmi/Bmi/FETCH_USER_PARAMETERS'
+export const SET_USER_NAME = 'bmi/User/SET_USER_NAME'
+export const SET_USER_EMAIL = 'bmi/User/SET_USER_EMAIL'

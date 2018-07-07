@@ -10,7 +10,7 @@ import NumberInput from '../../Components/NumberInput'
 import GenderInput from '../../Components/GenderInput'
 import Button from '../../Components/Button'
 
-import { updateBmiParameters } from './actions'
+import { updateBmiAge, updateBmiWeight, updateBmiHeight, updateBmiGender } from './actions'
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,0.8)'
 Modal.setAppElement('#root')
@@ -28,27 +28,23 @@ class Bmi extends Component {
   }
 
   setAge = (age) => {
-    const { weight, height, gender } = this.props.bmi.parameters
-    this.props.updateBmiParameters({ age, weight, height, gender })
+    this.props.updateBmiAge(age)
   }
 
   setWeight = (weight) => {
-    const { age, height, gender } = this.props.bmi.parameters
-    this.props.updateBmiParameters({ age, weight, height, gender })
+    this.props.updateBmiWeight(weight)
   }
 
   setHeight = (height) => {
-    const { age, weight, gender } = this.props.bmi.parameters
-    this.props.updateBmiParameters({ age, weight, height, gender })
+    this.props.updateBmiHeight(height)
   }
 
   setGender = (gender) => {
-    const { age, weight, height } = this.props.bmi.parameters
-    this.props.updateBmiParameters({ age, weight, height, gender })
+    this.props.updateBmiGender(gender)
   }
 
   renderModal = () => {
-    const { weight, height } = this.props.bmi.parameters
+    const { weight, height } = this.props.bmi
     const bmi = 703 * (weight / (height * height))
     const customStyles = {
       content: {
@@ -78,7 +74,7 @@ class Bmi extends Component {
   }
 
   render () {
-    const { age, weight, height, gender } = this.props.bmi.parameters
+    const { age, weight, height, gender } = this.props.bmi
     return (
       <View style={styles.container}>
         <Header title='BMI Calculator' />
@@ -185,5 +181,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({ bmi: state.bmi })
 
 export default connect(mapStateToProps, {
-  updateBmiParameters
+  updateBmiAge,
+  updateBmiWeight,
+  updateBmiHeight,
+  updateBmiGender
 })(Bmi)

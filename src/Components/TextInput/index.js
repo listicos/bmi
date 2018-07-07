@@ -13,6 +13,7 @@ const TextInputComponent = (props: any) => {
         style={styles.input}
         underlineColorAndroid='transparent'
         secureTextEntry={password}
+        value={value}
         onChangeText={onChangeText}
       />
     </View>
