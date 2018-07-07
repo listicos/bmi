@@ -10,7 +10,7 @@ import NumberInput from '../../Components/NumberInput'
 import GenderInput from '../../Components/GenderInput'
 import Button from '../../Components/Button'
 
-import { updateBmiAge, updateBmiWeight, updateBmiHeight, updateBmiGender } from './actions'
+import { updateAge, updateWeight, updateHeight, updateGender } from './actions'
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,0.8)'
 Modal.setAppElement('#root')
@@ -28,24 +28,25 @@ class Bmi extends Component {
   }
 
   setAge = (age) => {
-    this.props.updateBmiAge(age)
+    this.props.updateAge(age)
   }
 
   setWeight = (weight) => {
-    this.props.updateBmiWeight(weight)
+    this.props.updateWeight(weight)
   }
 
   setHeight = (height) => {
-    this.props.updateBmiHeight(height)
+    this.props.updateHeight(height)
   }
 
   setGender = (gender) => {
-    this.props.updateBmiGender(gender)
+    this.props.updateGender(gender)
   }
 
   renderModal = () => {
     const { weight, height } = this.props.bmi
-    const bmi = 703 * (weight / (height * height))
+    const meters = height / 100
+    const bmi = weight / (meters * meters)
     const customStyles = {
       content: {
         top: '50%',
@@ -86,17 +87,17 @@ class Bmi extends Component {
                   <NumberInput min={1} max={99} label='Age' placeholder='' value={age} onChangeValue={this.setAge} />
                   <NumberInput
                     min={10}
-                    max={300}
+                    max={200}
                     label='Weight'
-                    placeholder='pounds'
+                    placeholder='kg'
                     value={weight}
                     onChangeValue={this.setWeight}
                   />
                   <NumberInput
-                    min={50}
+                    min={20}
                     max={250}
                     label='Height'
-                    placeholder='inches'
+                    placeholder='cm'
                     value={height}
                     onChangeValue={this.setHeight}
                   />
@@ -181,8 +182,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({ bmi: state.bmi })
 
 export default connect(mapStateToProps, {
-  updateBmiAge,
-  updateBmiWeight,
-  updateBmiHeight,
-  updateBmiGender
+  updateAge,
+  updateWeight,
+  updateHeight,
+  updateGender
 })(Bmi)

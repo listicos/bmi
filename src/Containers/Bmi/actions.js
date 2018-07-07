@@ -1,28 +1,28 @@
-import { SET_BMI_AGE, SET_BMI_WEIGHT, SET_BMI_HEIGHT, SET_BMI_GENDER } from './constants'
+import { SET_AGE, SET_WEIGHT, SET_HEIGHT, SET_GENDER } from './constants'
 
-export const updateBmiAge = (age) => {
+export const updateAge = (age) => {
   return {
-    type: SET_BMI_AGE,
+    type: SET_AGE,
     payload: age
   }
 }
 
-export const updateBmiWeight = (weight) => {
+export const updateWeight = (weight) => {
   return {
-    type: SET_BMI_WEIGHT,
+    type: SET_WEIGHT,
     payload: weight
   }
 }
-export const updateBmiHeight = (height) => {
+export const updateHeight = (height) => {
   return {
-    type: SET_BMI_HEIGHT,
+    type: SET_HEIGHT,
     payload: height
   }
 }
 
-export const updateBmiGender = (gender) => {
+export const updateGender = (gender) => {
   return {
-    type: SET_BMI_GENDER,
+    type: SET_GENDER,
     payload: gender
   }
 }
