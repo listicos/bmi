@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
 import { Colors, Fonts } from '../../Themes'
@@ -9,22 +10,17 @@ import NumberInput from '../../Components/NumberInput'
 import GenderInput from '../../Components/GenderInput'
 import Button from '../../Components/Button'
 
-Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,0.8)'
+import { updateBmiParameters } from './actions'
 
-class Calculator extends Component {
+Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,0.8)'
+Modal.setAppElement('#root')
+
+class Bmi extends Component {
   constructor (props: any) {
     super(props)
     this.state = {
-      age: 18,
-      weight: 160,
-      height: 70,
-      gender: '',
       open: false
     }
-  }
-
-  calculate = () => {
-    this.openModal()
   }
 
   toggleModal () {
@@ -32,23 +28,28 @@ class Calculator extends Component {
   }
 
   setAge = (age) => {
-    this.setState({ age })
+    const { weight, height, gender } = this.props.bmi.parameters
+    this.props.updateBmiParameters({ age, weight, height, gender })
   }
 
   setWeight = (weight) => {
-    this.setState({ weight })
+    const { age, height, gender } = this.props.bmi.parameters
+    this.props.updateBmiParameters({ age, weight, height, gender })
   }
 
   setHeight = (height) => {
-    this.setState({ height })
+    const { age, weight, gender } = this.props.bmi.parameters
+    this.props.updateBmiParameters({ age, weight, height, gender })
   }
 
   setGender = (gender) => {
-    this.setState({ gender })
+    const { age, weight, height } = this.props.bmi.parameters
+    this.props.updateBmiParameters({ age, weight, height, gender })
   }
 
   renderModal = () => {
-    const bmi = 703 * (this.state.weight / (this.state.height * this.state.height))
+    const { weight, height } = this.props.bmi.parameters
+    const bmi = 703 * (weight / (height * height))
     const customStyles = {
       content: {
         top: '50%',
@@ -77,6 +78,7 @@ class Calculator extends Component {
   }
 
   render () {
+    const { age, weight, height, gender } = this.props.bmi.parameters
     return (
       <View style={styles.container}>
         <Header title='BMI Calculator' />
@@ -85,20 +87,13 @@ class Calculator extends Component {
             <View style={styles.inner}>
               <View style={styles.wrap}>
                 <View style={styles.cards}>
-                  <NumberInput
-                    min={1}
-                    max={99}
-                    label='Age'
-                    placeholder=''
-                    value={this.state.age}
-                    onChangeValue={this.setAge}
-                  />
+                  <NumberInput min={1} max={99} label='Age' placeholder='' value={age} onChangeValue={this.setAge} />
                   <NumberInput
                     min={10}
                     max={300}
                     label='Weight'
                     placeholder='pounds'
-                    value={this.state.weight}
+                    value={weight}
                     onChangeValue={this.setWeight}
                   />
                   <NumberInput
@@ -106,12 +101,12 @@ class Calculator extends Component {
                     max={250}
                     label='Height'
                     placeholder='inches'
-                    value={this.state.height}
+                    value={height}
                     onChangeValue={this.setHeight}
                   />
                 </View>
                 <View style={[styles.cards, styles.genderCards]}>
-                  <GenderInput value={this.state.gender} onChangeValue={this.setGender} />
+                  <GenderInput value={gender} onChangeValue={this.setGender} />
                 </View>
               </View>
             </View>
@@ -187,4 +182,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Calculator
+const mapStateToProps = (state) => ({ bmi: state.bmi })
+
+export default connect(mapStateToProps, {
+  updateBmiParameters
+})(Bmi)

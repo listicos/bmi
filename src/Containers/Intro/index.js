@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import { Colors, Fonts } from '../../Themes'
 
 import TextInput from '../../Components/TextInput'
 import Button from '../../Components/Button'
 
+import { updateUserParameters } from './actions'
+
 class Intro extends Component {
   start = () => {
-    this.props.history.push('/calculator')
+    this.props.history.push('/bmi')
+  }
+
+  setName = (name) => {
+    const { email } = this.props.user.parameters
+    this.props.updateUserParameters({ name, email })
+  }
+
+  setEmail = (email) => {
+    const { name } = this.props.user.parameters
+    this.props.updateUserParameters({ name, email })
   }
 
   render () {
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -21,9 +35,9 @@ class Intro extends Component {
         </View>
         <View style={styles.welcomeContainer}>
           <View style={styles.form}>
-            <TextInput label='Enter your name' color={Colors.contrastText} />
+            <TextInput label='Enter your name' color={Colors.contrastText} onChangeText={this.setName} />
             <View style={styles.space} />
-            <TextInput label='Enter your email' color={Colors.contrastText} />
+            <TextInput label='Enter your email' color={Colors.contrastText} onChangeText={this.setEmail} />
             <View style={styles.space} />
             <Button text='Register' onPress={this.start} />
           </View>
@@ -72,4 +86,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withRouter(Intro)
+const mapStateToProps = (state) => ({ user: state.user })
+
+export default withRouter(
+  connect(mapStateToProps, {
+    updateUserParameters
+  })(Intro)
+)

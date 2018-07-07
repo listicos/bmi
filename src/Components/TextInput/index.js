@@ -4,12 +4,17 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { Colors, Fonts } from '../../Themes'
 
 const TextInputComponent = (props: any) => {
-  const { label, value, onChangeValue, password, color } = props
+  const { label, value, onChangeText, password, color } = props
 
   return (
     <View style={styles.container}>
       {label && <Text style={[styles.label, color && { color }]}>{label}</Text>}
-      <TextInput style={styles.input} underlineColorAndroid='transparent' secureTextEntry={password} />
+      <TextInput
+        style={styles.input}
+        underlineColorAndroid='transparent'
+        secureTextEntry={password}
+        onChangeText={onChangeText}
+      />
     </View>
   )
 }

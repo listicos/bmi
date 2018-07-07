@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import promiseMiddleware from 'redux-promise-middleware'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
-import QuizReducer from '../Containers/Quiz/reducer'
+import BmiReducer from '../Containers/Bmi/reducer'
+import UserReducer from '../Containers/Intro/reducer'
 
 export const reducers = combineReducers({
-  quiz: QuizReducer
+  bmi: BmiReducer,
+  user: UserReducer
 })
 
 export default (loggerEnable) =>
