@@ -1,77 +1,27 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-
-import { Colors, Fonts } from '../../Themes'
-
+import { Colors } from '../../Themes'
 import Header from '../../Components/Header'
 import NumberInput from '../../Components/NumberInput'
 import GenderInput from '../../Components/GenderInput'
 import Button from '../../Components/Button'
-
 import { updateAge, updateWeight, updateHeight, updateGender } from './actions'
+import Result from './result'
 
 Modal.defaultStyles.overlay.backgroundColor = 'rgba(0,0,0,0.8)'
 Modal.setAppElement('#root')
-
 class Bmi extends Component {
-  constructor (props: any) {
+  constructor (props) {
     super(props)
     this.state = {
       open: false
     }
   }
 
-  toggleModal () {
+  toggleModal = () => {
     this.setState({ open: !this.state.open })
-  }
-
-  setAge = (age) => {
-    this.props.updateAge(age)
-  }
-
-  setWeight = (weight) => {
-    this.props.updateWeight(weight)
-  }
-
-  setHeight = (height) => {
-    this.props.updateHeight(height)
-  }
-
-  setGender = (gender) => {
-    this.props.updateGender(gender)
-  }
-
-  renderModal = () => {
-    const { weight, height } = this.props.bmi
-    const meters = height / 100
-    const bmi = weight / (meters * meters)
-    const customStyles = {
-      content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-      }
-    }
-
-    return (
-      <Modal
-        isOpen={this.state.open}
-        style={customStyles}
-        onRequestClose={this.closeModal}
-        contentLabel='Example Modal'
-      >
-        <View style={styles.modal}>
-          <Text style={styles.modalHeader}>Your BMI is:</Text>
-          <Text style={styles.bmi}>{bmi.toFixed(2)}</Text>
-          <Button text='Close' marginTop={30} onPress={() => this.toggleModal()} />
-        </View>
-      </Modal>
-    )
   }
 
   render () {
@@ -79,19 +29,26 @@ class Bmi extends Component {
     return (
       <View style={styles.container}>
         <Header title='BMI Calculator' />
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={styles.flexContent}>
           <View style={styles.content}>
             <View style={styles.inner}>
               <View style={styles.wrap}>
                 <View style={styles.cards}>
-                  <NumberInput min={1} max={99} label='Age' placeholder='' value={age} onChangeValue={this.setAge} />
+                  <NumberInput
+                    min={1}
+                    max={99}
+                    label='Age'
+                    placeholder=''
+                    value={age}
+                    onChangeValue={this.props.updateAge}
+                  />
                   <NumberInput
                     min={10}
                     max={200}
                     label='Weight'
                     placeholder='kg'
                     value={weight}
-                    onChangeValue={this.setWeight}
+                    onChangeValue={this.props.updateWeight}
                   />
                   <NumberInput
                     min={20}
@@ -99,20 +56,20 @@ class Bmi extends Component {
                     label='Height'
                     placeholder='cm'
                     value={height}
-                    onChangeValue={this.setHeight}
+                    onChangeValue={this.props.updateHeight}
                   />
                 </View>
                 <View style={[styles.cards, styles.genderCards]}>
-                  <GenderInput value={gender} onChangeValue={this.setGender} />
+                  <GenderInput value={gender} onChangeValue={this.props.updateGender} />
                 </View>
               </View>
             </View>
           </View>
         </ScrollView>
         <View style={styles.footer}>
-          <Button text='Calculate' onPress={() => this.toggleModal()} />
+          <Button text='Calculate' onPress={this.toggleModal} />
         </View>
-        {this.renderModal()}
+        <Result isOpen={this.state.open} onRequestClose={this.toggleModal} bmi={this.props.bmi} />
       </View>
     )
   }
@@ -122,6 +79,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background
+  },
+  flexContent: {
+    flex: 1
   },
   header: {
     alignItems: 'center',
@@ -162,20 +122,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 100
-  },
-  modal: {
-    paddingHorizontal: 50
-  },
-  modalHeader: {
-    ...Fonts.style.h1,
-    color: Colors.contrastText,
-    textAlign: 'center',
-    marginBottom: 15
-  },
-  bmi: {
-    ...Fonts.style.inputNumber,
-    color: Colors.contrastText,
-    textAlign: 'center'
   }
 })
 

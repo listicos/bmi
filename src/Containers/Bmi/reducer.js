@@ -1,10 +1,10 @@
 import Immutable from 'seamless-immutable'
 import { SET_AGE, SET_WEIGHT, SET_HEIGHT, SET_GENDER } from './constants'
 
-const INITIAL_STATE: BmiState = Immutable({
-  age: 18,
-  weight: 20,
-  height: 40,
+const INITIAL_STATE = Immutable({
+  age: 20,
+  weight: 75,
+  height: 175,
   gender: ''
 })
 

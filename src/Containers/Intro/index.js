@@ -2,25 +2,14 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import { Colors, Fonts } from '../../Themes'
-
 import TextInput from '../../Components/TextInput'
 import Button from '../../Components/Button'
-
 import { updateUserName, updateUserEmail } from './actions'
 
 class Intro extends Component {
   start = () => {
     this.props.history.push('/bmi')
-  }
-
-  setName = (name) => {
-    this.props.updateUserName(name)
-  }
-
-  setEmail = (email) => {
-    this.props.updateUserEmail(email)
   }
 
   render () {
@@ -33,13 +22,18 @@ class Intro extends Component {
         </View>
         <View style={styles.welcomeContainer}>
           <View style={styles.form}>
-            <TextInput label='Enter your name' color={Colors.contrastText} value={name} onChangeText={this.setName} />
+            <TextInput
+              label='Enter your name'
+              color={Colors.contrastText}
+              value={name}
+              onChangeText={this.props.updateUserName}
+            />
             <View style={styles.space} />
             <TextInput
               label='Enter your email'
               color={Colors.contrastText}
               value={email}
-              onChangeText={this.setEmail}
+              onChangeText={this.props.updateUserEmail}
             />
             <View style={styles.space} />
             <Button text='Register' onPress={this.start} />
