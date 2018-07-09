@@ -1,7 +1,8 @@
 const getBMI = (weight, height) => {
   const meters = height / 100
-  const bmi = (weight / (meters * meters)).toFixed(2)
+  const bmi = weight / (meters * meters)
   let group = ''
+
   switch (true) {
     case bmi < 18.5:
       group = 'Underweight'
@@ -16,6 +17,7 @@ const getBMI = (weight, height) => {
       group = 'Obese'
       break
   }
+
   return {
     bmi,
     group

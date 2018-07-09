@@ -26,6 +26,7 @@ class Bmi extends Component {
 
   render () {
     const { age, weight, height, gender } = this.props.bmi
+
     return (
       <View style={styles.container}>
         <Header title='BMI Calculator' />

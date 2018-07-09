@@ -4,10 +4,19 @@ exports[`Render Button 1`] = `
 <TouchableOpacity
   activeOpacity={0.2}
   style={
-    Object {
-      "backgroundColor": "#4B8EFF",
-      "paddingVertical": 20,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0D0E13",
+        "borderRadius": 3,
+        "flexDirection": "row",
+        "height": 45,
+        "justifyContent": "center",
+        "paddingHorizontal": 25,
+      },
+      undefined,
+      undefined,
+    ]
   }
 >
   <Text
@@ -17,8 +26,10 @@ exports[`Render Button 1`] = `
     style={
       Object {
         "color": "#FFFFFF",
-        "fontSize": 30,
-        "textAlign": "center",
+        "fontFamily": "Raleway",
+        "fontSize": 18,
+        "fontWeight": "400",
+        "letterSpacing": 0.5,
       }
     }
   />

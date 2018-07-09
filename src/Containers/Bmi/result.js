@@ -24,7 +24,7 @@ const Result = ({ isOpen, onRequestClose, bmi }) => {
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={onRequestClose}>
       <View style={styles.modal}>
         <Text style={styles.modalHeader}>Your BMI is:</Text>
-        <Text style={styles.result}>{bmiResult.bmi}</Text>
+        <Text style={styles.result}>{bmiResult.bmi.toFixed(2)}</Text>
         <Text style={styles.result}>{bmiResult.group}</Text>
         <Button text='Close' marginTop={30} onPress={onRequestClose} />
       </View>
